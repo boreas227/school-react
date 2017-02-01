@@ -8,7 +8,8 @@ export default class Klass extends React.Component{
     this.get = this.get.bind(this);
   }
 
-  get(){
+  get(e){
+    e.preventDefault();
     const id = +this.kid.value;
     const url = `http://localhost:9001/klasses/${id}`;
     axios.get(url).then(r => {
@@ -22,19 +23,39 @@ export default class Klass extends React.Component{
     return (
       <div>
         <h1>Klassroom Query</h1>
-        <div>
-          <label>Klass ID</label>
-          <input ref={n => this.kid = n} type="number" />
-          <button onClick={this.get}>Get Students</button>
+        <div className="row">
+          <div className="col-xs-4">
+
+            <form>
+              <div className="form-group">
+                <label>Klass Id</label>
+                <input ref={n => this.kid = n} type="number" className="form-control" />
+              </div>
+              <div className="form-group">
+                <button onClick={this.get} className="btn btn-success">Get Students</button>
+              </div>
+            </form>
+
+            <h3>Students</h3>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.students.map(s => {
+                    return <tr key={s.id}><td>{s.email}</td></tr>;
+                  })
+                }
+              </tbody>
+            </table>
+
+          </div>
+          <div className="col-xs-8">
+          </div>
         </div>
-        <h3>Students</h3>
-        <ul>
-          {
-            this.state.students.map(s => {
-              return <li key={s.id}>{s.email}</li>;
-            })
-          }
-        </ul>
       </div>
     );
   }
