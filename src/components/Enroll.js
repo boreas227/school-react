@@ -28,7 +28,7 @@ export default class Enroll extends React.Component{
         fee
       }
     };
-    const url = 'http://localhost:9001/learning/enroll';
+    const url = 'http://localhost:9000/learning/enroll';
     axios.post(url, payload).then(r => {
       browserHistory.push('/klass');
     }).catch(e => {

@@ -11,7 +11,7 @@ export default class Klass extends React.Component{
   get(e){
     e.preventDefault();
     const id = +this.kid.value;
-    const url = `http://localhost:9001/klasses/${id}`;
+    const url = `http://localhost:9000/klasses/${id}`;
     axios.get(url).then(r => {
       this.setState({students: r.data});
     }).catch(e => {
